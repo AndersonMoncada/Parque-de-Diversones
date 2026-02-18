@@ -25,7 +25,7 @@ class Mecanicas:
         print(f"Precauciones: {self.precauciones}")
 
 
-class MontanaRusa:
+class MontanaRusa(Mecanicas):
 
     def velocidad_maxima(self) -> str:
         return "Velocidad máxima: 120 km/h"
@@ -34,7 +34,7 @@ class MontanaRusa:
         return "Tiene 3 inversiones (vueltas de cabeza)"
 
 
-class RuedaDeLaFortuna:
+class RuedaDeLaFortuna(Mecanicas):
 
     def altura_maxima(self) -> str:
         return "Altura máxima: 50 metros"
@@ -43,7 +43,7 @@ class RuedaDeLaFortuna:
         return "Ofrece vista panorámica de todo el parque"
 
 
-class BarcoPirata:
+class BarcoPirata(Mecanicas):
 
     def angulo_inclinacion(self) -> str:
         return "Ángulo máximo de inclinación: 75 grados"
@@ -52,7 +52,7 @@ class BarcoPirata:
         return "Capacidad: 40 personas por viaje"
 
 
-class TorreCaidaLibre:
+class TorreCaidaLibre(Mecanicas):
 
     def altura(self) -> str:
         return "Altura: 60 metros"
@@ -61,7 +61,7 @@ class TorreCaidaLibre:
         return "Velocidad de caída: 100 km/h"
 
 
-class CarrosChocones:
+class CarrosChocones(Mecanicas):
 
     def numero_carros(self) -> str:
         return "Cuenta con 20 carros eléctricos"
