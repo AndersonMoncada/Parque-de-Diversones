@@ -32,11 +32,32 @@ class Acuatico:
         print(f"Profundidad: {self.profundidad} metros")
         print(f"Tipo de propulsión: {self.propulsion}")
         print(f"Estatura mínima: {self.estatura_minima} m")
-        print(f"Precauciones: {self.precauciones}")
         print(f"Edad minima es:{self.edad_minima}")
 
 
 class Tobogan(Acuatico):
+
+    def __init__(
+        self,
+        nombre: str,
+        capacidad: int,
+        profundidad: float,
+        propulsion: str,
+        estatura_minima: float,
+        edad_minima: int,
+        precauciones: str,
+    ):
+
+        super().__init__(
+            nombre,
+            capacidad,
+            profundidad,
+            propulsion,
+            estatura_minima,
+            edad_minima,
+            precauciones,
+        )
+
     def velocidad_descenso(self) -> str:
         return "La velocidad de descenso es 43km/h"
 
@@ -45,6 +66,26 @@ class Tobogan(Acuatico):
 
 
 class Piscina(Acuatico):
+    def __init__(
+        self,
+        nombre: str,
+        capacidad: int,
+        profundidad: float,
+        propulsion: str,
+        estatura_minima: float,
+        edad_minima: int,
+        precauciones: str,
+    ):
+        """Inicializa una piscina."""
+        super().__init__(
+            nombre,
+            capacidad,
+            profundidad,
+            propulsion,
+            estatura_minima,
+            edad_minima,
+            precauciones,
+        )
 
     def temperatura(self) -> str:
         return "Es de 25°C"
@@ -54,6 +95,26 @@ class Piscina(Acuatico):
 
 
 class RioLento(Acuatico):
+    def __init__(
+        self,
+        nombre: str,
+        capacidad: int,
+        profundidad: float,
+        propulsion: str,
+        estatura_minima: float,
+        edad_minima: int,
+        precauciones: str,
+    ):
+        """Inicializa un río lento."""
+        super().__init__(
+            nombre,
+            capacidad,
+            profundidad,
+            propulsion,
+            estatura_minima,
+            edad_minima,
+            precauciones,
+        )
 
     def longitud_recorrido(self) -> str:
         return "Longitud del recorrido: 300 metros"
