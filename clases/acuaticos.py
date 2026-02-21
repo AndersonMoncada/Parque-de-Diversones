@@ -8,130 +8,81 @@ class Acuatico:
         estatura_minima: float,
         edad_minima: int,
     ):
-        self.nombrenombre = nombre
-        self.capacidad = capacidad
-        self.profundidad = profundidad
-        self.propulsion = propulsion
-        self.estatura_minima = estatura_minima
-        self.edad_minima = edad_minima
+        if capacidad <= 0:
+            raise ValueError("La capacidad debe ser mayor a 0")
+        if profundidad <= 0:
+            raise ValueError("La profundidad debe ser mayor a 0")
+        if estatura_minima < 0 or edad_minima < 0:
+            raise ValueError("Estatura y edad no pueden ser negativas")
 
-    def imprimir_data(self):
-        print(
-            f"La capacidad de la atraccion acuatica es de {self.capacidad} personas, su profundidad es {self.profundidad} metros, y su tipo de propulsion es : {self.propulsion}"
-        )
+        self._nombre = nombre.strip()
+        self._capacidad = capacidad
+        self._profundidad = profundidad
+        self._propulsion = propulsion.strip()
+        self._estatura_minima = estatura_minima
+        self._edad_minima = edad_minima
+
+        self._visitantes: list[str] = []
+
+    @property
+    def nombre(self) -> str:
+        return self._nombre
+
+    @property
+    def capacidad(self) -> int:
+        return self._capacidad
+
+    @property
+    def estatura_minima(self) -> float:
+        return self._estatura_minima
+
+    @property
+    def edad_minima(self) -> int:
+        return self._edad_minima
 
     def verificar_estatura(self, estatura_persona: float) -> bool:
-        return estatura_persona >= self.estatura_minima
+        if estatura_persona is None or estatura_persona <= 0:
+            return False
+        return estatura_persona >= self._estatura_minima
 
-    def verificar_entrada(self, compro_entrada: bool) -> bool:
-        return compro_entrada
+    def verificar_edad(self, edad_persona: int) -> bool:
+        if edad_persona is None or edad_persona < 0:
+            return False
+        return edad_persona >= self._edad_minima
+
+    def puede_acceder(self, edad: int, estatura: float, tiene_entrada: bool) -> bool:
+        """Verifica todos los requisitos de acceso."""
+        return (
+            self.verificar_edad(edad)
+            and self.verificar_estatura(estatura)
+            and tiene_entrada
+        )
+
+    def registrar_visitante(self, nombre_visitante: str) -> bool:
+        """Registra un visitante en la atracción."""
+        if not nombre_visitante or not nombre_visitante.strip():
+            return False
+        nombre = nombre_visitante.strip()
+        if nombre in self._visitantes:
+            return False
+        self._visitantes.append(nombre)
+        return True
+
+    def listar_visitantes(self) -> list[str]:
+        """Retorna lista de visitantes registrados."""
+        return list(self._visitantes)
+
+    def __str__(self) -> str:
+        partes = [f"Atracción: {self._nombre} ({self.__class__.__name__})"]
+        partes.append(f"Capacidad: {self._capacidad}")
+        partes.append(f"Edad mínima: {self._edad_minima} años")
+        return " | ".join(partes)
 
     def mostrar_informacion(self) -> None:
-        print(f"\nAtracción Acuática: {self.nombre}")
-        print(f"Capacidad: {self.capacidad} personas")
-        print(f"Profundidad: {self.profundidad} metros")
-        print(f"Tipo de propulsión: {self.propulsion}")
-        print(f"Estatura mínima: {self.estatura_minima} m")
-        print(f"Edad minima es:{self.edad_minima}")
-
-
-class Tobogan(Acuatico):
-
-    def __init__(
-        self,
-        nombre: str,
-        capacidad: int,
-        profundidad: float,
-        propulsion: str,
-        estatura_minima: float,
-        edad_minima: int,
-        precauciones: str,
-    ):
-
-        super().__init__(
-            nombre,
-            capacidad,
-            profundidad,
-            propulsion,
-            estatura_minima,
-            edad_minima,
-            precauciones,
-        )
-
-    def velocidad_descenso(self) -> str:
-        return "La velocidad de descenso es 43km/h"
-
-    def longitud_Tobogan(self) -> str:
-        return "La longitud es de 90 metros"
-
-
-class Piscina(Acuatico):
-    def __init__(
-        self,
-        nombre: str,
-        capacidad: int,
-        profundidad: float,
-        propulsion: str,
-        estatura_minima: float,
-        edad_minima: int,
-        precauciones: str,
-    ):
-        """Inicializa una piscina."""
-        super().__init__(
-            nombre,
-            capacidad,
-            profundidad,
-            propulsion,
-            estatura_minima,
-            edad_minima,
-            precauciones,
-        )
-
-    def temperatura(self) -> str:
-        return "Es de 25°C"
-
-    def longitud(self) -> str:
-        return "8.20 metros"
-
-
-class RioLento(Acuatico):
-    def __init__(
-        self,
-        nombre: str,
-        capacidad: int,
-        profundidad: float,
-        propulsion: str,
-        estatura_minima: float,
-        edad_minima: int,
-        precauciones: str,
-    ):
-        """Inicializa un río lento."""
-        super().__init__(
-            nombre,
-            capacidad,
-            profundidad,
-            propulsion,
-            estatura_minima,
-            edad_minima,
-            precauciones,
-        )
-
-    def longitud_recorrido(self) -> str:
-        return "Longitud del recorrido: 300 metros"
-
-    def velocidad_corriente(self) -> str:
-        return "Velocidad de corriente 5 km/h ¿)"
-
-    def tiempo_recorrido(self) -> str:
-        return "Tiempo promedio del recorrido: 15 minutos"
-
-
-if __name__ == "__main__":
-    tobogan = Tobogan(
-        nombre="Tobogán del Dragon",
-        capacidad=2,
-        profundidad=1.70,
-        propulsion="Tobogán",
-        estatura_minima=1.40,
-        edad_minima=11,
-    )
+        """Muestra información detallada."""
+        print(f"\n{'='*50}")
+        print(str(self))
+        print(f"{'='*50}")
+        print(f"Profundidad: {self._profundidad} m")
+        print(f"Propulsión: {self._propulsion}")
+        print(f"Estatura mínima: {self._estatura_minima} m")
