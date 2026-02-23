@@ -1,7 +1,6 @@
 import time
-
+import random
 from Usuario import Persona
-
 
 class JuegosFisicos:
     def __init__(
@@ -11,12 +10,27 @@ class JuegosFisicos:
         edad_minima: int,
         estatura_minima: float,
     ):
-        self.nombre_juego = nombre_juego
-        self.altura_juego = altura_juego
-        self.edad_minima = edad_minima
-        self.estatura_minima = estatura_minima
+        self._nombre_juego = nombre_juego
+        self._altura_juego = altura_juego
+        self._edad_minima = edad_minima
+        self._estatura_minima = estatura_minima
+    @property
+    def nombre_juego(self):
+        return self._nombre_juego
 
-    def mostrarInfo(self) -> None:
+    @property
+    def altura_juego(self):
+        return self._altura_juego
+
+    @property
+    def edad_minima(self):
+        return self._edad_minima
+
+    @property
+    def estatura_minima(self):
+        return self._estatura_minima
+
+    def mostrar_info(self) -> None:
         print(
             "Nombre:",
             self.nombre_juego,
@@ -54,11 +68,19 @@ class Tirolesa(JuegosFisicos):
             edad_minima,
             estatura_minima,
         )
-        self.velocidad = velocidad
-        self.peso_maximo = peso_maximo
+        self._velocidad = velocidad
+        self._peso_maximo = peso_maximo
+    @property
+    def velocidad(self):
+        return self._velocidad
+    
+    @property
+    def peso_maximo(self):
+        return self._peso_maximo
 
-    def mostrarInfo(self) -> None:
-        super().mostrarInfo()
+
+    def mostrar_info(self) -> None:
+        super().mostrar_info()
         print("Velocidad: ", self.velocidad, "km/h")
         print("Peso maximo: ", self.peso_maximo)
 
@@ -103,10 +125,14 @@ class MuroEscalada(JuegosFisicos):
             edad_minima,
             estatura_minima,
         )
-        self.dificultad = dificultad
-
-    def mostrarInfo(self) -> None:
-        super().mostrarInfo()
+        self._dificultad = dificultad
+        
+    @property
+    def dificultad(self):
+        return self._dificultad
+    
+    def mostrar_info(self) -> None:
+        super().mostrar_info()
         print("dificultad: ", self.dificultad)
 
     def entrar_muro(self, grupo) -> None:
@@ -124,3 +150,6 @@ class MuroEscalada(JuegosFisicos):
             time.sleep(1)
             print("🧗🏼‍♂️")
         print("Turno terminado, ", persona.nombre)
+
+
+ 
