@@ -1,5 +1,7 @@
 import time
 
+from Usuario import Persona
+
 
 class JuegosFisicos:
     def __init__(
@@ -72,7 +74,7 @@ class Tirolesa(JuegosFisicos):
     def entrar_tirolesa(self, grupo) -> None:
         for persona in grupo:
             if self.validar_condiciones_entrada(persona):
-                print(persona.nombre, " Puedes entraaaar!! :D")
+                print(persona.nombre, " Puedes entraaaar!! 😁")
                 self.iniciar_recorrido(persona)
             else:
                 print("Lo siento, ", persona.nombre, " no puedes entrar :(")
@@ -80,13 +82,9 @@ class Tirolesa(JuegosFisicos):
 
     def iniciar_recorrido(self, persona) -> None:
         print("Iniciando recorrido para ", persona.nombre)
-        time.sleep(1)
-        print("🌳")
-        time.sleep(1)
-        print("🌳")
-        time.sleep(1)
-        print("🌳")
-        time.sleep(1)
+        for i in range(0, 4):
+            time.sleep(1)
+            print("🌳")
         print("Recorrido terminado, ", persona.nombre)
 
 
@@ -114,22 +112,15 @@ class MuroEscalada(JuegosFisicos):
     def entrar_muro(self, grupo) -> None:
         for persona in grupo:
             if self.validar_condiciones_entrada(persona):
-                print("Puedes entraaar ", persona.nombre, " :D")
+                print("Puedes entraaar ", persona.nombre, "😁")
                 self.iniciar_escalada_muro(persona)
             else:
                 print("Lo siento, no puedes entrar ", persona.nombre, " :c")
-            print("="*40)
+            print("=" * 40)
 
     def iniciar_escalada_muro(self, persona) -> None:
         print("Iniciando turno para: ", persona.nombre)
-        time.sleep(1)
-        print("🧗🏼‍♂️")
-        time.sleep(1)
-        print("🧗🏼‍♂️")
-        time.sleep(1)
-        print("🧗🏼‍♂️")
-        time.sleep(1)
+        for i in range(0, 4):
+            time.sleep(1)
+            print("🧗🏼‍♂️")
         print("Turno terminado, ", persona.nombre)
-
-
-
