@@ -20,7 +20,7 @@ class JuegosElectronicos:
             duracion: Duración del juego en minutos
             edad_minima: Edad mínima requerida
             estatura_minima: Estatura mínima en metros
-            precauciones: Precauciones de seguridad
+
         """
         self.nombre = nombre
         self.tipo = tipo
@@ -79,7 +79,6 @@ class SimuladorVR(JuegosElectronicos):
         duracion: int,
         edad_minima: int,
         estatura_minima: float,
-        precauciones: str,
     ):
         """Inicializa un simulador VR."""
         super().__init__(
@@ -89,7 +88,6 @@ class SimuladorVR(JuegosElectronicos):
             duracion,
             edad_minima,
             estatura_minima,
-            precauciones,
         )
 
     def tipo_experiencia(self) -> str:
@@ -115,7 +113,6 @@ class JuegoArcade(JuegosElectronicos):
         duracion: int,
         edad_minima: int,
         estatura_minima: float,
-        precauciones: str,
     ):
         """Inicializa un juego arcade."""
         super().__init__(
@@ -125,7 +122,6 @@ class JuegoArcade(JuegosElectronicos):
             duracion,
             edad_minima,
             estatura_minima,
-            precauciones,
         )
 
     def tipo_controles(self) -> str:
@@ -151,7 +147,6 @@ class ShooterFPS(JuegosElectronicos):
         duracion: int,
         edad_minima: int,
         estatura_minima: float,
-        precauciones: str,
     ):
         """Inicializa un shooter FPS."""
         super().__init__(
@@ -161,7 +156,6 @@ class ShooterFPS(JuegosElectronicos):
             duracion,
             edad_minima,
             estatura_minima,
-            precauciones,
         )
 
     def tipo_armas(self) -> str:
@@ -185,7 +179,6 @@ if __name__ == "__main__":
         duracion=10,
         edad_minima=12,
         estatura_minima=1.30,
-        precauciones="No recomendado para personas con epilepsia o propensas al mareo",
     )
 
     simulacion_zombies.mostrar_informacion()
