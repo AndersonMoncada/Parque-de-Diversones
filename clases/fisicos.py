@@ -150,6 +150,88 @@ class MuroEscalada(JuegosFisicos):
             time.sleep(1)
             print("🧗🏼‍♂️")
         print("Turno terminado, ", persona.nombre)
+        
+class SaltoBungee(JuegosFisicos):
+
+    def __init__(
+        self,
+        nombre_juego: str,
+        altura_juego: float,
+        edad_minima: int,
+        estatura_minima: float,
+    ):
+        super().__init__(
+            nombre_juego,
+            altura_juego,
+            edad_minima,
+            estatura_minima,
+        )
+
+    def entrar_salto(self, grupo) -> None:
+        for persona in grupo:
+            if self.validar_condiciones_entrada(persona):
+                print("Puedes tirarte ", persona.nombre, "😁")
+                self.iniciar_salto(persona)
+            else:
+                print("Lo siento, no puedes tirarte ", persona.nombre, " :c")
+            print("=" * 40)
+
+    def iniciar_salto(self, persona) -> None:
+        for i in range(3, 0, -1):
+            print(i)
+            time.sleep(1)
+
+        print("Saltando: ", persona.nombre)
+
+        for i in range(0, 4):
+            time.sleep(1)
+            print("🧍🏼‍♂️")
+
+        print("Salto terminado, ", persona.nombre)
+
+
+class TiroConArco(JuegosFisicos):
+
+    def __init__(
+        self,
+        nombre_juego: str,
+        edad_minima: int,
+        estatura_minima: float,
+    ):
+        super().__init__(
+            nombre_juego,
+            0.0,
+            edad_minima,
+            estatura_minima,
+        )
+
+    def entrar_tiro_arco(self, grupo) -> None:
+        for persona in grupo:
+            if self.validar_condiciones_entrada(persona):
+                print("Puedes entraaar", persona.nombre, "😁")
+                self.iniciar_tiro_arco(persona)
+            else:
+                print("Lo siento, no puedes entrar ", persona.nombre)
+            print("=" * 40)
+
+    def iniciar_tiro_arco(self, persona) -> None:
+        totalpuntos = 0
+
+        for ronda in range(1, 4):
+            puntuacion = random.randint(0, 10)
+
+            print("Ronda: ", ronda)
+            print("Disparando...🏹")
+
+            for i in range(3, 0, -1):
+                print(i)
+                time.sleep(1)
+
+            print("Puntuación: ", puntuacion, " 🎯")
+            totalpuntos += puntuacion
+
+        print(persona.nombre, ", has obtenido ", totalpuntos, " puntos")
+        print("Fin del turno para ", persona.nombre)
 
 
  
