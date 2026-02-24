@@ -4,9 +4,7 @@ from clases.acuaticos import Acuatico, RioLento, BotesChocones
 
 
 def registrar_personas() -> list[Persona]:
-    cantidad = int(
-        input("Hola, tú eres el titular del grupo. ¿Cuántas personas vas a registrar? ")
-    )
+    cantidad = int(input("Hola, tú eres el titular del grupo. ¿Cuántas personas vas a registrar? "))
     personas = []
 
     for i in range(cantidad):
@@ -52,7 +50,6 @@ def main():
         estatura_minima=1.20,
         edad_minima=8,
     )
-
     rio = RioLento(
         nombre="Río Amazonas",
         capacidad=10,
@@ -60,7 +57,6 @@ def main():
         estatura_minima=1.0,
         edad_minima=5,
     )
-
     botes = BotesChocones(
         nombre="Botes Locos",
         capacidad=6,
