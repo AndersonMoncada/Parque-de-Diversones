@@ -255,3 +255,45 @@ class Acuatico:
         print(f" Personas que accedieron: {len(self._visitantes)}")
         print(f" Personas rechazadas: {len(grupo) - len(self._visitantes)}")
         print(f" Capacidad restante: {self.espacios_disponibles()}")
+
+
+class RioLento(Acuatico):
+    """Representa el juego acuático Río Lento."""
+
+    def __init__(
+        self,
+        nombre: str,
+        capacidad: int,
+        profundidad: float,
+        estatura_minima: float,
+        edad_minima: int,
+    ):
+        super().__init__(
+            nombre,
+            capacidad,
+            profundidad,
+            "Corriente natural",
+            estatura_minima,
+            edad_minima,
+        )
+
+
+class BotesChocones(Acuatico):
+    """Representa el juego acuático Botes Chocones."""
+
+    def __init__(
+        self,
+        nombre: str,
+        capacidad: int,
+        profundidad: float,
+        estatura_minima: float,
+        edad_minima: int,
+    ):
+        super().__init__(
+            nombre,
+            capacidad,
+            profundidad,
+            "Motor eléctrico",
+            estatura_minima,
+            edad_minima,
+        )
