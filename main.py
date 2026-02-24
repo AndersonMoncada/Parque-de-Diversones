@@ -65,6 +65,22 @@ def main():
         edad_minima=7,
     )
 
+    rio = RioLento(
+        nombre="Río Peligro",
+        capacidad=10,
+        profundidad=0.8,
+        estatura_minima=1.0,
+        edad_minima=5,
+    )
+
+    botes = BotesChocones(
+        nombre="Botes Locos",
+        capacidad=6,
+        profundidad=1.0,
+        estatura_minima=1.1,
+        edad_minima=7,
+    )
+
     grupo = registrar_personas()
     menu(grupo, tobogan)
 
