@@ -192,7 +192,6 @@ class SaltoBungee(JuegosFisicos):
 
         print("Salto terminado, ", persona.nombre)
 
-
 class TiroConArco(JuegosFisicos):
 
     def __init__(

@@ -17,9 +17,6 @@ class Mecanicas:
         else:
             return False
 
-    def verificar_estatura(self, estatura_persona: float) -> bool:
-        return estatura_persona >= self.estatura_minima
-
     def verificar_entrada(self, compro_entrada: bool) -> bool:
         return compro_entrada
 
@@ -46,6 +43,7 @@ class MontanaRusa(Mecanicas):
         super().mostrar_informacion()
         print("Velocidad maxima: ", self.velocidad_maxima, "km/h")
         print("Numero de inversiones: ", self.inversiones)
+    
 
 
 class RuedaDeLaFortuna(Mecanicas):
