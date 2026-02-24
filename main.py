@@ -1,6 +1,6 @@
 import time
 from clases.Usuario import Persona
-from clases.acuaticos import Acuatico
+from clases.acuaticos import Acuatico, RioLento, BotesChocones
 
 
 def registrar_personas() -> list[Persona]:
@@ -41,6 +41,14 @@ def menu(grupo: list[Persona], tobogan: Acuatico):
             print("Hasta luego!")
         else:
             print("Teclea un número del 1 al 3 para recibir alguna atención. :)")
+
+
+rio = RioLento(
+    "Río Amazonas", capacidad=10, profundidad=0.8, estatura_minima=1.2, edad_minima=8
+)
+botes = BotesChocones(
+    "Botes Locos", capacidad=8, profundidad=1.0, estatura_minima=1.1, edad_minima=11
+)
 
 
 def main():
