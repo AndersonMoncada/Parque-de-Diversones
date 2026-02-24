@@ -4,9 +4,7 @@ from clases.acuaticos import Acuatico, RioLento, BotesChocones
 
 
 def registrar_personas() -> list[Persona]:
-    cantidad = int(
-        input("Hola, tú eres el titular del grupo. ¿Cuántas personas vas a registrar? ")
-    )
+    cantidad = int(input("Hola, tú eres el titular del grupo. ¿Cuántas personas vas a registrar? "))
     personas = []
 
     for i in range(cantidad):
@@ -43,14 +41,6 @@ def menu(grupo: list[Persona], tobogan: Acuatico):
             print("Teclea un número del 1 al 3 para recibir alguna atención. :)")
 
 
-rio = RioLento(
-    "Río Amazonas", capacidad=10, profundidad=0.8, estatura_minima=1.2, edad_minima=8
-)
-botes = BotesChocones(
-    "Botes Locos", capacidad=8, profundidad=1.0, estatura_minima=1.1, edad_minima=11
-)
-
-
 def main():
     tobogan = Acuatico(
         nombre="Tobogán del Dragón",
@@ -59,6 +49,20 @@ def main():
         propulsion="Gravedad",
         estatura_minima=1.20,
         edad_minima=8,
+    )
+    rio = RioLento(
+        nombre="Río Amazonas",
+        capacidad=10,
+        profundidad=0.8,
+        estatura_minima=1.0,
+        edad_minima=5,
+    )
+    botes = BotesChocones(
+        nombre="Botes Locos",
+        capacidad=6,
+        profundidad=1.0,
+        estatura_minima=1.1,
+        edad_minima=7,
     )
 
     grupo = registrar_personas()
