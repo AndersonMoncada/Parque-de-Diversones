@@ -25,7 +25,6 @@ def registrar_personas() -> list[Persona]:
 
 # ─── SEDES ────────────────────────────────────────────────
 
-
 def menu_acuaticos(grupo: list[Persona], juegos: list[Acuatico]):
     opcion = ""
 
@@ -40,9 +39,7 @@ def menu_acuaticos(grupo: list[Persona], juegos: list[Acuatico]):
         if opcion.isdigit() and 1 <= int(opcion) <= len(juegos):
             juegos[int(opcion) - 1].iniciar_atraccion_grupo(grupo)
         elif opcion != str(len(juegos) + 1):
-            print(
-                f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}."
-            )
+            print(f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}.")
 
 
 def menu_electronicos(grupo: list[Persona], juegos: list[JuegoElectronico]):
@@ -59,9 +56,7 @@ def menu_electronicos(grupo: list[Persona], juegos: list[JuegoElectronico]):
         if opcion.isdigit() and 1 <= int(opcion) <= len(juegos):
             juegos[int(opcion) - 1].iniciar_juego_grupo(grupo)
         elif opcion != str(len(juegos) + 1):
-            print(
-                f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}."
-            )
+            print(f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}.")
 
 
 def menu_sedes(grupo, juegos_acuaticos, juegos_electronicos):
@@ -91,7 +86,6 @@ def menu_sedes(grupo, juegos_acuaticos, juegos_electronicos):
 
 # ─── MENÚ PRINCIPAL ───────────────────────────────────────
 
-
 def menu_principal(grupo, juegos_acuaticos, juegos_electronicos):
     opcion = ""
 
@@ -111,7 +105,6 @@ def menu_principal(grupo, juegos_acuaticos, juegos_electronicos):
 
 
 # ─── MAIN ─────────────────────────────────────────────────
-
 
 def main():
     juegos_acuaticos = [

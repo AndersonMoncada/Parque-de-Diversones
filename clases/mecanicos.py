@@ -1,19 +1,21 @@
 class Mecanicas:
-    nombre: str
-    estatura_minima: float
-    reglas: str
-    precauciones: str
-
     def _init_(
-        self, nombre: str, estatura_minima: float, reglas: str, precauciones: str
+        self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str
     ) -> None:
         self.nombre = nombre
         self.estatura_minima = estatura_minima
+        self.edad_minima = edad_minima
         self.reglas = reglas
         self.precauciones = precauciones
 
-    def verificar_estatura(self, estatura_persona: float) -> bool:
-        return estatura_persona >= self.estatura_minima
+    def validar_condiciones_entrada(self, persona) -> bool:
+        if (
+            persona.edad >= self.edad_minima
+            and persona.estatura >= self.estatura_minima
+        ):
+            return True
+        else:
+            return False
 
     def verificar_entrada(self, compro_entrada: bool) -> bool:
         return compro_entrada
@@ -26,45 +28,87 @@ class Mecanicas:
 
 
 class MontanaRusa(Mecanicas):
+    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, velocidad_maxima: float, inversiones: int):
+        super()._init_(
+            nombre,
+            estatura_minima,
+            edad_minima,
+            reglas,
+            precauciones,
+        )
+        self.velocidad_maxima = velocidad_maxima
+        self.inversiones = inversiones
 
-    def velocidad_maxima(self) -> str:
-        return "Velocidad máxima: 120 km/h"
-
-    def numero_inversiones(self) -> str:
-        return "Tiene 3 inversiones (vueltas de cabeza)"
+    def mostrar_informacion(self) -> None:
+        super().mostrar_informacion()
+        print("Velocidad maxima: ", self.velocidad_maxima, "km/h")
+        print("Numero de inversiones: ", self.inversiones)
+    
 
 
 class RuedaDeLaFortuna(Mecanicas):
+    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, altura_maxima: float):
+        super()._init_(
+            nombre,
+            estatura_minima,
+            edad_minima,
+            reglas,
+            precauciones,
+        )
+        self.altura_maxima = altura_maxima
 
-    def altura_maxima(self) -> str:
-        return "Altura máxima: 50 metros"
-
-    def vista(self) -> str:
-        return "Ofrece vista panorámica de todo el parque"
+    def mostrar_informacion(self) -> None:
+        super().mostrar_informacion()
+        print("Altura maxima:", self.altura_maxima)
 
 
 class BarcoPirata(Mecanicas):
+    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, capacidad: int):
+        super()._init_(
+            nombre,
+            estatura_minima,
+            edad_minima,
+            reglas,
+            precauciones,
+        )
+        self.capacidad = capacidad
 
-    def angulo_inclinacion(self) -> str:
-        return "Ángulo máximo de inclinación: 75 grados"
-
-    def capacidad(self) -> str:
-        return "Capacidad: 40 personas por viaje"
+    def mostrar_informacion(self) -> None:
+        super().mostrar_informacion()
+        print("Capacidad personas:", self.capacidad)
 
 
 class TorreCaidaLibre(Mecanicas):
+    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, altura: float, velocidad_caida: float):
+        super()._init_(
+            nombre,
+            estatura_minima,
+            edad_minima,
+            reglas,
+            precauciones,
+        )
+        self.altura = altura
+        self.velocidad_caida = velocidad_caida
 
-    def altura(self) -> str:
-        return "Altura: 60 metros"
-
-    def velocidad_caida(self) -> str:
-        return "Velocidad de caída: 100 km/h"
+    def mostrar_informacion(self) -> None:
+        super().mostrar_informacion()
+        print("Altura:", self.altura)
+        print("Velocidad de caida:", self.velocidad_caida)
 
 
 class CarrosChocones(Mecanicas):
+    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, numero_carros: int, duracion: float):
+        super()._init_(
+            nombre,
+            estatura_minima,
+            edad_minima,
+            reglas,
+            precauciones,
+        )
+        self.numero_carros = numero_carros
+        self.duracion = duracion
 
-    def numero_carros(self) -> str:
-        return "Cuenta con 20 carros eléctricos"
-
-    def duracion(self) -> str:
-        return "Duración del juego: 5 minutos"
+    def mostrar_informacion(self) -> None:
+        super().mostrar_informacion()
+        print("Numero de carritos: ", self.numero_carros)
+        print("Duracion ronda: ", self.duracion)
