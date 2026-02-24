@@ -54,7 +54,7 @@ def main():
     )
 
     rio = RioLento(
-        nombre="Río Amazonas",
+        nombre="Río Peligro",
         capacidad=10,
         profundidad=0.8,
         estatura_minima=1.0,
