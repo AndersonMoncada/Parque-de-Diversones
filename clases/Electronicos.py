@@ -1,4 +1,8 @@
-class JuegosElectronicos:
+import time
+from .Usuario import Persona
+
+
+class JuegoElectronico:
     """Clase base para atracciones de juegos electrónicos."""
 
     def __init__(
@@ -10,24 +14,22 @@ class JuegosElectronicos:
         edad_minima: int,
         estatura_minima: float,
     ):
-        """
-        Inicializa una atracción de juegos electrónicos.
+        if capacidad <= 0:
+            raise ValueError("La capacidad debe ser mayor a 0")
+        if duracion <= 0:
+            raise ValueError("La duración debe ser mayor a 0")
+        if estatura_minima < 0:
+            raise ValueError("La estatura mínima no puede ser negativa")
+        if edad_minima < 0:
+            raise ValueError("La edad mínima no puede ser negativa")
 
-        Args:
-            nombre: Nombre de la atracción
-            tipo: Tipo de juego (arcade, VR, shooter, etc.)
-            capacidad: Número máximo de jugadores
-            duracion: Duración del juego en minutos
-            edad_minima: Edad mínima requerida
-            estatura_minima: Estatura mínima en metros
-            precauciones: Precauciones de seguridad
-        """
-        self.nombre = nombre
-        self.tipo = tipo
-        self.capacidad = capacidad
-        self.duracion = duracion
-        self.edad_minima = edad_minima
-        self.estatura_minima = estatura_minima
+        self._nombre = nombre.strip()
+        self._tipo = tipo.strip()
+        self._capacidad = capacidad
+        self._duracion = duracion
+        self._edad_minima = edad_minima
+        self._estatura_minima = estatura_minima
+        self._visitantes: list[str] = []
 
     @property
     def nombre(self) -> str:
@@ -45,32 +47,153 @@ class JuegosElectronicos:
     def edad_minima(self) -> int:
         return self._edad_minima
 
-    def verificar_edad(self, edad_persona: int) -> bool:
-        """Verifica si la persona cumple con la edad mínima."""
-        return edad_persona >= self.edad_minima
+    def verificar_edad(self, persona: Persona) -> bool:
+        if persona.edad is None or persona.edad < 0:
+            return False
+        return persona.edad >= self._edad_minima
 
-    def verificar_estatura(self, estatura_persona: float) -> bool:
-        """Verifica si la persona cumple con la estatura mínima."""
-        return estatura_persona >= self.estatura_minima
+    def verificar_estatura(self, persona: Persona) -> bool:
+        if persona.estatura is None or persona.estatura <= 0:
+            return False
+        return persona.estatura >= self._estatura_minima
 
-    def verificar_entrada(self, compro_entrada: bool) -> bool:
-        """Verifica si la persona compró entrada."""
-        return compro_entrada
+    def registrar_visitante(self, nombre_visitante: str) -> bool:
+        if not nombre_visitante or not nombre_visitante.strip():
+            return False
+        nombre = nombre_visitante.strip()
+        if nombre in self._visitantes:
+            return False
+        if len(self._visitantes) >= self._capacidad:
+            return False
+        self._visitantes.append(nombre)
+        return True
+
+    def espacios_disponibles(self) -> int:
+        return self._capacidad - len(self._visitantes)
 
     def mostrar_informacion(self) -> None:
-        """Muestra toda la información de la atracción."""
-        print(f"\n{'='*50}")
-        print(f"Atracción Electrónica: {self.nombre}")
-        print(f"{'='*50}")
-        print(f"Tipo: {self.tipo}")
-        print(f"Capacidad: {self.capacidad} jugadores")
-        print(f"Duración: {self.duracion} minutos")
-        print(f"Edad mínima: {self.edad_minima} años")
-        print(f"Estatura mínima: {self.estatura_minima} m")
+        print(f"\n{'='*30}")
+        print(f" INFORMACIÓN DEL JUEGO")
+        print(f"{'='*30}")
+
+        print("Cargando información", end="")
+        for _ in range(3):
+            time.sleep(0.8)
+            print(".", end="", flush=True)
+        print(" Si\n")
+
+        print(f"Nombre: {self._nombre}")
+        time.sleep(0.6)
+        print(f"Tipo: {self._tipo}")
+        time.sleep(0.5)
+        print(f"Capacidad: {self._capacidad} jugadores")
+        time.sleep(0.6)
+        print(f"Duración: {self._duracion} minutos")
+        time.sleep(0.6)
+        print(f"Edad mínima: {self._edad_minima} años")
+        time.sleep(0.6)
+        print(f"Estatura mínima: {self._estatura_minima} m")
+        time.sleep(0.7)
+        print(f"Visitantes actuales: {len(self._visitantes)}/{self._capacidad}")
+        print(f"{'='*30}\n")
+
+    def verificar_acceso_interactivo(
+        self, persona: Persona, tiene_entrada: bool
+    ) -> None:
+        print(f"\n{'─'*30}")
+        print(f"VERIFICANDO ACCESO: {persona.nombre}")
+        print(f"{'─'*30}")
+
+        print("Verificando entrada", end="")
+        for _ in range(2):
+            time.sleep(0.4)
+            print(".", end="", flush=True)
+        time.sleep(0.4)
+
+        if not tiene_entrada:
+            print("No")
+            print(f"\n{persona.nombre}, no tienes entrada válida.")
+            print(f"{'─'*30}\n")
+            return
+        print("Si")
+
+        print(f"Verificando edad ({persona.edad} años)", end="")
+        for _ in range(2):
+            time.sleep(0.6)
+            print(".", end="", flush=True)
+        time.sleep(0.4)
+
+        if not self.verificar_edad(persona):
+            print("No")
+            print(f"\n{persona.nombre}, edad insuficiente.")
+            print(f"Necesitas al menos {self._edad_minima} años.")
+            print(f"{'─'*30}\n")
+            return
+        print("Si")
+
+        print(f"Verificando estatura ({persona.estatura} m)", end="")
+        for _ in range(2):
+            time.sleep(0.5)
+            print(".", end="", flush=True)
+        time.sleep(0.8)
+
+        if not self.verificar_estatura(persona):
+            print("No")
+            print(f"\n{persona.nombre}, estatura insuficiente.")
+            print(f"Necesitas al menos {self._estatura_minima} m.")
+            print(f"{'─'*30}\n")
+            return
+        print("Si")
+
+        print("Verificando capacidad", end="")
+        for _ in range(2):
+            time.sleep(0.8)
+            print(".", end="", flush=True)
+        time.sleep(0.8)
+
+        if self.espacios_disponibles() <= 0:
+            print("No")
+            print(f"\n{persona.nombre}, el juego está lleno.")
+            print(f"Capacidad: {len(self._visitantes)}/{self._capacidad}")
+            print(f"{'─'*30}\n")
+            return
+        print("Si")
+
+        print("\n" + "=" * 30)
+        print("¡ACCESO PERMITIDO!")
+        print("=" * 30)
+        print(f"¡Bienvenido {persona.nombre} a {self._nombre}!")
+
+        if self.registrar_visitante(persona.nombre):
+            print(f"Registrado exitosamente")
+            print(f"Espacios disponibles: {self.espacios_disponibles()}")
+
+        print(f"{'─'*30}\n")
+
+    def iniciar_juego_grupo(
+        self, grupo: list[Persona], tienen_entrada: bool = True
+    ) -> None:
+        print(f"\n{'='*30}")
+        print(f" BIENVENIDOS A: {self._nombre.upper()}")
+        print(f"{'='*30}")
+        print(f" Grupo de {len(grupo)} personas")
+        time.sleep(1)
+
+        for i, persona in enumerate(grupo, 1):
+            print(f"\n[{i}/{len(grupo)}] Procesando...")
+            time.sleep(1.3)
+            self.verificar_acceso_interactivo(persona, tienen_entrada)
+            time.sleep(1.2)
+
+        print(f" RESUMEN DE ACCESOS")
+        print(f" Personas que accedieron: {len(self._visitantes)}")
+        print(f" Personas rechazadas: {len(grupo) - len(self._visitantes)}")
+        print(f" Capacidad restante: {self.espacios_disponibles()}")
+        print(f"{'='*30}\n")
 
 
-class SimuladorVR(JuegosElectronicos):
-    """Representa un simulador de realidad virtual."""
+class SimuladorVR(JuegoElectronico):
+    """Simulador de realidad virtual."""
 
     def __init__(
         self,
@@ -79,9 +202,7 @@ class SimuladorVR(JuegosElectronicos):
         duracion: int,
         edad_minima: int,
         estatura_minima: float,
-        precauciones: str,
     ):
-        """Inicializa un simulador VR."""
         super().__init__(
             nombre,
             "Realidad Virtual",
@@ -89,24 +210,11 @@ class SimuladorVR(JuegosElectronicos):
             duracion,
             edad_minima,
             estatura_minima,
-            precauciones,
         )
 
-    def tipo_experiencia(self) -> str:
-        """Retorna el tipo de experiencia VR."""
-        return "Experiencia inmersiva 360° con sonido envolvente"
 
-    def equipo_necesario(self) -> str:
-        """Retorna el equipo necesario."""
-        return "Visor VR Oculus Quest 2 y controladores"
-
-    def nivel_intensidad(self) -> str:
-        """Retorna el nivel de intensidad."""
-        return "Alta intensidad - puede causar mareo"
-
-
-class JuegoArcade(JuegosElectronicos):
-    """Representa un juego arcade clásico o moderno."""
+class JuegoArcade(JuegoElectronico):
+    """Juego arcade clásico o moderno."""
 
     def __init__(
         self,
@@ -115,34 +223,14 @@ class JuegoArcade(JuegosElectronicos):
         duracion: int,
         edad_minima: int,
         estatura_minima: float,
-        precauciones: str,
     ):
-        """Inicializa un juego arcade."""
         super().__init__(
-            nombre,
-            "Arcade",
-            capacidad,
-            duracion,
-            edad_minima,
-            estatura_minima,
-            precauciones,
+            nombre, "Arcade", capacidad, duracion, edad_minima, estatura_minima
         )
 
-    def tipo_controles(self) -> str:
-        """Retorna el tipo de controles."""
-        return "Joystick clásico y botones táctiles"
 
-    def dificultad(self) -> str:
-        """Retorna el nivel de dificultad."""
-        return "Dificultad: Media - Progresiva"
-
-    def puntuacion_maxima(self) -> str:
-        """Retorna información sobre la puntuación."""
-        return "Puntuación máxima histórica: 999,999 puntos"
-
-
-class ShooterFPS(JuegosElectronicos):
-    """Representa un juego shooter en primera persona."""
+class ShooterFPS(JuegoElectronico):
+    """Juego shooter en primera persona."""
 
     def __init__(
         self,
@@ -151,98 +239,7 @@ class ShooterFPS(JuegosElectronicos):
         duracion: int,
         edad_minima: int,
         estatura_minima: float,
-        precauciones: str,
     ):
-        """Inicializa un shooter FPS."""
         super().__init__(
-            nombre,
-            "Shooter FPS",
-            capacidad,
-            duracion,
-            edad_minima,
-            estatura_minima,
-            precauciones,
+            nombre, "Shooter FPS", capacidad, duracion, edad_minima, estatura_minima
         )
-
-    def tipo_armas(self) -> str:
-        """Retorna los tipos de armas disponibles."""
-        return "Pistola láser, rifle de asalto y escopeta"
-
-    def modo_juego(self) -> str:
-        """Retorna el modo de juego."""
-        return "Modo: Supervivencia - Oleadas de enemigos"
-
-    def clasificacion(self) -> str:
-        """Retorna la clasificación del juego."""
-        return "Clasificación: +15 años - Contenido de acción intensa"
-
-
-if __name__ == "__main__":
-
-    simulacion_zombies = SimuladorVR(
-        nombre="Simulación Apocalipsis Zombie",
-        capacidad=4,
-        duracion=10,
-        edad_minima=12,
-        estatura_minima=1.30,
-        precauciones="No recomendado para personas con epilepsia o propensas al mareo",
-    )
-
-    simulacion_zombies.mostrar_informacion()
-    print(simulacion_zombies.tipo_experiencia())
-    print(simulacion_zombies.equipo_necesario())
-    print(simulacion_zombies.nivel_intensidad())
-
-    doom = ShooterFPS(
-        nombre="Doom Arcade",
-        capacidad=1,
-        duracion=15,
-        edad_minima=15,
-        estatura_minima=1.40,
-    )
-
-    doom.mostrar_informacion()
-    print(doom.tipo_armas())
-    print(doom.modo_juego())
-    print(doom.clasificacion())
-
-    tetris = JuegoArcade(
-        nombre="Tetris Versus",
-        capacidad=2,
-        duracion=20,
-        edad_minima=5,
-        estatura_minima=1.20,
-    )
-
-    tetris.mostrar_informacion()
-    print(tetris.tipo_controles())
-    print(tetris.dificultad())
-    print(tetris.puntuacion_maxima())
-
-    print("\n" + "=" * 50)
-    print("VERIFICACIÓN DE ACCESO")
-    print("=" * 50)
-
-    persona_edad = 14
-    persona_estatura = 1.35
-    compro_entrada = True
-
-    print(f"\nVerificando acceso a {doom.nombre}:")
-    print(f"Edad de la persona: {persona_edad} años")
-    print(f"Estatura de la persona: {persona_estatura} m")
-    print(f"¿Cumple edad mínima? {'Si' if doom.verificar_edad(persona_edad) else 'No'}")
-    print(
-        f"¿Cumple estatura mínima? {'Si' if doom.verificar_estatura(persona_estatura) else 'No'}"
-    )
-    print(
-        f"¿Compró entrada? {' Si' if doom.verificar_entrada(compro_entrada) else 'No'}"
-    )
-
-    if (
-        doom.verificar_edad(persona_edad)
-        and doom.verificar_estatura(persona_estatura)
-        and doom.verificar_entrada(compro_entrada)
-    ):
-        print("\n Acceso permitido!! Bienvenido al juego.")
-    else:
-        print("\n Acceso Denegado!! No cumple con los requisitos.")
