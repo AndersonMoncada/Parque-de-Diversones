@@ -2,6 +2,7 @@ import time
 import random
 from Usuario import Persona
 
+
 class JuegosFisicos:
     def __init__(
         self,
@@ -14,6 +15,7 @@ class JuegosFisicos:
         self._altura_juego = altura_juego
         self._edad_minima = edad_minima
         self._estatura_minima = estatura_minima
+
     @property
     def nombre_juego(self):
         return self._nombre_juego
@@ -70,10 +72,11 @@ class Tirolesa(JuegosFisicos):
         )
         self._velocidad = velocidad
         self._peso_maximo = peso_maximo
+
     @property
     def velocidad(self):
         return self._velocidad
-    
+
     @property
     def peso_maximo(self):
         return self._peso_maximo
@@ -125,11 +128,11 @@ class MuroEscalada(JuegosFisicos):
             estatura_minima,
         )
         self._dificultad = dificultad
-        
+
     @property
     def dificultad(self):
         return self._dificultad
-    
+
     def mostrar_info(self) -> None:
         super().mostrar_info()
         print("dificultad: ", self.dificultad)
@@ -149,6 +152,7 @@ class MuroEscalada(JuegosFisicos):
             time.sleep(1)
             print("🧗🏼‍♂️")
         print("Turno terminado, ", persona.nombre)
+
 
 class SaltoBungee(JuegosFisicos):
 

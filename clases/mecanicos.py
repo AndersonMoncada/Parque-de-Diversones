@@ -17,6 +17,9 @@ class Mecanicas:
         else:
             return False
 
+    def verificar_estatura(self, estatura_persona: float) -> bool:
+        return estatura_persona >= self.estatura_minima
+
     def verificar_entrada(self, compro_entrada: bool) -> bool:
         return compro_entrada
 
@@ -36,13 +39,14 @@ class MontanaRusa(Mecanicas):
             reglas,
             precauciones,
         )
-        self.velocidad_maxima=velocidad_maxima
-        self.inversiones=inversiones
+        self.velocidad_maxima = velocidad_maxima
+        self.inversiones = inversiones
 
     def mostrar_informacion(self) -> None:
         super().mostrar_informacion()
-        print("Velocidad maxima: ",self.velocidad_maxima,"km/h")
-        print("Numero de inversiones: ",self.inversiones)
+        print("Velocidad maxima: ", self.velocidad_maxima, "km/h")
+        print("Numero de inversiones: ", self.inversiones)
+
 
 class RuedaDeLaFortuna(Mecanicas):
     def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, altura_maxima: float):
@@ -53,11 +57,11 @@ class RuedaDeLaFortuna(Mecanicas):
             reglas,
             precauciones,
         )
-        self.altura_maxima=altura_maxima
+        self.altura_maxima = altura_maxima
 
     def mostrar_informacion(self) -> None:
         super().mostrar_informacion()
-        print("Altura maxima:",self.altura_maxima)
+        print("Altura maxima:", self.altura_maxima)
 
 
 class BarcoPirata(Mecanicas):
@@ -69,12 +73,11 @@ class BarcoPirata(Mecanicas):
             reglas,
             precauciones,
         )
-        self.capacidad=capacidad
+        self.capacidad = capacidad
 
     def mostrar_informacion(self) -> None:
         super().mostrar_informacion()
-        print("Capacidad personas:",self.capacidad)
-
+        print("Capacidad personas:", self.capacidad)
 
 
 class TorreCaidaLibre(Mecanicas):
@@ -86,13 +89,13 @@ class TorreCaidaLibre(Mecanicas):
             reglas,
             precauciones,
         )
-        self.altura=altura
-        self.velocidad_caida=velocidad_caida
+        self.altura = altura
+        self.velocidad_caida = velocidad_caida
 
     def mostrar_informacion(self) -> None:
         super().mostrar_informacion()
-        print("Altura:",self.altura)
-        print("Velocidad de caida:",self.velocidad_caida)
+        print("Altura:", self.altura)
+        print("Velocidad de caida:", self.velocidad_caida)
 
 
 class CarrosChocones(Mecanicas):
@@ -104,9 +107,10 @@ class CarrosChocones(Mecanicas):
             reglas,
             precauciones,
         )
-        self.numero_carros=numero_carros
-        self.duracion=duracion
+        self.numero_carros = numero_carros
+        self.duracion = duracion
+
     def mostrar_informacion(self) -> None:
-      super().mostrar_informacion()
-      print("Numero de carritos: ",self.numero_carros)
-      print("Duracion ronda: ",self.duracion)
+        super().mostrar_informacion()
+        print("Numero de carritos: ", self.numero_carros)
+        print("Duracion ronda: ", self.duracion)
