@@ -1,7 +1,6 @@
 import time
 from .Usuario import Persona
 
-
 class Mecanicas:
     """
     Clase base para todas las atracciones mecánicas del parque.
