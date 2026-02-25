@@ -1,4 +1,5 @@
 import time
+from Usuario import Persona
 class Mecanicas:
     def __init__(
         self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str
