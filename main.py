@@ -4,6 +4,7 @@ from clases.acuaticos import Acuatico
 from clases.Electronicos import JuegoElectronico
 from clases.mecanicos import Mecanicas
 from clases.fisicos import JuegosFisicos
+from clases.entradas import Entrada
 from clases.Atracciones import (
     juegos_acuaticos,
     juegos_electronicos,
@@ -163,6 +164,8 @@ def menu_principal(
 
 def main():
     grupo = registrar_personas()
+    entrada = Entrada(costo=30000) 
+    entrada.calcular_total(grupo)
     menu_principal(
         grupo, juegos_acuaticos, juegos_electronicos, juegos_mecanicos, juegos_fisicos
     )
