@@ -1,3 +1,4 @@
+
 import time
 from clases.Usuario import Persona
 from clases.acuaticos import Acuatico
@@ -249,7 +250,7 @@ def menu_principal(
                 juegos_fisicos,
             )
         elif opcion == "2":
-            print("Hasta luego!")
+            print("Hasta luego, esperamos que se haya divertido 🎆🎇🎆!!")
         else:
             print("Teclea un número ya sea 1 o 2 para recibir atención ;)")
 
