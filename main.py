@@ -14,6 +14,25 @@ from clases.Atracciones import (
 
 
 def registrar_personas() -> list[Persona]:
+    """
+    Registra un grupo de personas visitantes del parque de diversiones.
+    
+    Solicita al usuario la cantidad de personas a registrar y luego recopila
+    información básica de cada una (nombre, edad, estatura y peso).
+    
+    Returns:
+        list[Persona]: Lista de objetos Persona registrados.
+    
+    Example:
+        >>> personas = registrar_personas()
+        Hola, tú eres el titular del grupo. ¿Cuántas personas vas a registrar? 2
+        Persona 1:
+          Nombre: Juan
+          Edad: 25
+          Estatura (metros): 1.75
+          Peso (kg): 70
+    """
+    
     cantidad = int(
         input("Hola, tú eres el titular del grupo. ¿Cuántas personas vas a registrar? ")
     )
@@ -35,7 +54,17 @@ def registrar_personas() -> list[Persona]:
 # ─── SEDES ────────────────────────────────────────────────
 
 
-def menu_acuaticos(grupo, juegos):
+def menu_acuaticos(grupo: list[Persona], juegos: list[Acuatico]) -> None:
+    """
+    Muestra y maneja el menú de juegos acuáticos.
+    
+    Permite al usuario seleccionar un juego acuático para que el grupo
+    participe. Incluye validación de entrada y opción de regreso.
+    
+    Args:
+        grupo (list[Persona]): Lista de personas del grupo.
+        juegos (list[Acuatico]): Lista de juegos acuáticos disponibles.
+    """
     opcion = ""
     while opcion != str(len(juegos) + 1):
         print("\n¿A cuál juego acuático quieres entrar?")
@@ -53,7 +82,17 @@ def menu_acuaticos(grupo, juegos):
             )
 
 
-def menu_electronicos(grupo, juegos):
+def menu_electronicos(grupo: list[Persona], juegos: list[JuegoElectronico]) -> None:
+    """
+    Muestra y maneja el menú de juegos electrónicos.
+    
+    Permite al usuario seleccionar un juego electrónico para que el grupo
+    participe. Incluye validación de entrada y opción de regreso.
+    
+    Args:
+        grupo (list[Persona]): Lista de personas del grupo.
+        juegos (list[JuegoElectronico]): Lista de juegos electrónicos disponibles.
+    """
     opcion = ""
     while opcion != str(len(juegos) + 1):
         print("\n¿A cuál juego electrónico quieres entrar?")
@@ -71,7 +110,17 @@ def menu_electronicos(grupo, juegos):
             )
 
 
-def menu_mecanicos(grupo, juegos):
+def menu_mecanicos(grupo: list[Persona], juegos: list[Mecanicas]) -> None:
+    """
+    Muestra y maneja el menú de juegos mecánicos.
+    
+    Permite al usuario seleccionar un juego mecánico específico para el grupo.
+    Utiliza métodos dinámicos según el tipo de juego seleccionado.
+    
+    Args:
+        grupo (list[Persona]): Lista de personas del grupo.
+        juegos (list[Mecanicas]): Lista de juegos mecánicos disponibles.
+    """
     metodos = ["entrar_montana", "entrar_rueda", "entrar_barco", "entrar_carros"]
     opcion = ""
     while opcion != str(len(juegos) + 1):
@@ -91,7 +140,17 @@ def menu_mecanicos(grupo, juegos):
             )
 
 
-def menu_fisicos(grupo, juegos):
+def menu_fisicos(grupo: list[Persona], juegos: list[JuegosFisicos]) -> None:
+    """
+    Muestra y maneja el menú de juegos físicos.
+    
+    Permite al usuario seleccionar un juego físico específico para el grupo.
+    Utiliza métodos dinámicos según el tipo de juego seleccionado.
+    
+    Args:
+        grupo (list[Persona]): Lista de personas del grupo.
+        juegos (list[JuegosFisicos]): Lista de juegos físicos disponibles.
+    """
     metodos = ["entrar_tirolesa", "entrar_muro", "entrar_salto", "entrar_tiro_arco"]
     opcion = ""
     while opcion != str(len(juegos) + 1):
@@ -112,8 +171,25 @@ def menu_fisicos(grupo, juegos):
 
 
 def menu_sedes(
-    grupo, juegos_acuaticos, juegos_electronicos, juegos_mecanicos, juegos_fisicos
-):
+    grupo: list[Persona],
+    juegos_acuaticos: list[Acuatico],
+    juegos_electronicos: list[JuegoElectronico],
+    juegos_mecanicos: list[Mecanicas],
+    juegos_fisicos: list[JuegosFisicos]
+) -> None:
+    """
+    Muestra el menú principal de sedes del parque de diversiones.
+    
+    Permite al usuario navegar entre las diferentes sedes (mecánicos,
+    electrónicos, acuáticos, físicos) y regresar al menú principal.
+    
+    Args:
+        grupo (list[Persona]): Lista de personas del grupo.
+        juegos_acuaticos (list[Acuatico]): Juegos acuáticos disponibles.
+        juegos_electronicos (list[JuegoElectronico]): Juegos electrónicos disponibles.
+        juegos_mecanicos (list[Mecanicas]): Juegos mecánicos disponibles.
+        juegos_fisicos (list[JuegosFisicos]): Juegos físicos disponibles.
+    """
     opcion = ""
     while opcion != "5":
         print("\n¿A cuál sede vas a entrar?")
@@ -138,8 +214,24 @@ def menu_sedes(
 
 
 def menu_principal(
-    grupo, juegos_acuaticos, juegos_electronicos, juegos_mecanicos, juegos_fisicos
-):
+    grupo: list[Persona],
+    juegos_acuaticos: list[Acuatico],
+    juegos_electronicos: list[JuegoElectronico],
+    juegos_mecanicos: list[Mecanicas],
+    juegos_fisicos: list[JuegosFisicos]
+) -> None:
+    """
+    Muestra el menú principal del sistema del parque de diversiones.
+    
+    Ofrece opciones para entrar a las sedes o salir del parque.
+    
+    Args:
+        grupo (list[Persona]): Lista de personas del grupo.
+        juegos_acuaticos (list[Acuatico]): Juegos acuáticos disponibles.
+        juegos_electronicos (list[JuegoElectronico]): Juegos electrónicos disponibles.
+        juegos_mecanicos (list[Mecanicas]): Juegos mecánicos disponibles.
+        juegos_fisicos (list[JuegosFisicos]): Juegos físicos disponibles.
+    """
     opcion = ""
     while opcion != "2":
         print("\n¿Qué quieres hacer?")
@@ -162,7 +254,12 @@ def menu_principal(
             print("Teclea un número ya sea 1 o 2 para recibir atención ;)")
 
 
-def main():
+def main() -> None:
+    """
+    Función principal del programa del parque de diversiones.
+    
+    Registra el grupo de personas y ejecuta el menú principal del sistema.
+    """
     grupo = registrar_personas()
     entrada = Entrada(costo=30000) 
     entrada.calcular_total(grupo)
@@ -171,4 +268,5 @@ def main():
     )
 
 
-main()
+if __name__ == "__main__":
+    main()
