@@ -1,20 +1,98 @@
-Parque de atracciones
+# 🎡 Parque de Diversiones
 
-Este proyecto hara varias funciones para un parque de atracciones teniendo en cuenta su diferentes variantes como lo pueden ser los juegos mecanicos,electronicos,acuaticos y de desafio fisico (como muros para escalar, circuitos de cuerdas etc). Tambien se llevara a cabo un control y monitoreo de las ventas de las entradas, el registro de los visitantes y el acceso a las diferentes atracciones (ya que no todas estan disponibles para todo el publico). Los podemos llevar a cabo con la edad, la altura 
+Sistema de gestión de acceso para un parque de diversiones desarrollado en Python. Permite registrar grupos de visitantes y validar su ingreso a las distintas atracciones según edad, estatura y peso.
 
+---
 
+## Estructura del proyecto
 
-Tecnologías Utilizadas
-Utilizaremos Github conectado con python para mayor eficiencia y menos redundancia de codigo
+```
+Parque-de-Diversones/
+├── main.py                  # Punto de entrada del programa
+├── clases/
+│   ├── Usuario.py           # Clase Persona
+│   ├── acuaticos.py         # Atracciones acuáticas
+│   ├── Electronicos.py      # Juegos electrónicos
+│   ├── mecanicos.py         # Juegos mecánicos
+│   ├── fisicos.py           # Juegos físicos
+│   └── Atracciones.py       # Instancias de todas las atracciones
+└── .gitignore
+```
 
-Instalación
+---
 
-Uso
+## Sedes y atracciones
 
-El usuario ingresara los datos como si fuera a registrarse para ir a un parque de diversiones y allí podra ver a que atracciones se podra subir, el precio de las entradas, el registro de cuando puede ir al parque.
+### Acuáticos
+- Tobogán del Dragón
+- Río Peligro *(Río Lento)*
+- Botes Locos *(Botes Chocones)*
 
-Contribución
+### Electrónicos
+- Simulación Apocalipsis Zombie *(Simulador VR)*
+- Doom Arcade *(Shooter FPS)*
+- Tetris Versus *(Arcade)*
 
-Contacto
+### Mecánicos
+- Montaña Rusa Extrema
+- Rueda de la Fortuna
+- Barco Pirata
+- Carros Chocones
 
-andersonmoncada1128797@correo.itm.edu.co
+### Físicos
+- Tirolesa Extrema
+- Muro de Escalada
+- Salto Bungee
+- Tiro con Arco
+
+---
+
+## Cómo ejecutarlo
+
+```bash
+python main.py
+```
+
+El programa pedirá registrar al grupo de visitantes y luego mostrará el menú principal.
+
+---
+
+## Flujo del programa
+
+```
+Registro de personas
+        ↓
+Menú principal
+        ↓
+Elegir sede → Mecánicos / Electrónicos / Acuáticos / Físicos
+        ↓
+Elegir juego
+        ↓
+Validación de acceso (edad, estatura, peso)
+        ↓
+Iniciar atracción
+```
+
+---
+
+## Requisitos
+
+- Python 3.10 o superior
+- No requiere librerías externas
+
+---
+
+## Ramas del repositorio
+
+| Rama | Descripción |
+|------|-------------|
+| `dev` | Rama de desarrollo principal |
+| `qa` | Pruebas y revisión |
+| `prod` | Versión estable para producción |
+
+---
+
+## Autores
+Daniela Restrepo Cano , Anderson Moncada Marin
+
+Proyecto desarrollado como práctica de Programación Orientada a Objetos con herencia, encapsulamiento y polimorfismo en Python.
