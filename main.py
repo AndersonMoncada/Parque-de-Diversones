@@ -2,6 +2,7 @@ import time
 from clases.Usuario import Persona
 from clases.acuaticos import Acuatico, RioLento, BotesChocones
 from clases.Electronicos import JuegoElectronico, SimuladorVR, JuegoArcade, ShooterFPS
+from clases.Atracciones import juegos_acuaticos, juegos_electronicos
 
 
 def registrar_personas() -> list[Persona]:
@@ -25,6 +26,7 @@ def registrar_personas() -> list[Persona]:
 
 # ─── SEDES ────────────────────────────────────────────────
 
+
 def menu_acuaticos(grupo: list[Persona], juegos: list[Acuatico]):
     opcion = ""
 
@@ -39,7 +41,9 @@ def menu_acuaticos(grupo: list[Persona], juegos: list[Acuatico]):
         if opcion.isdigit() and 1 <= int(opcion) <= len(juegos):
             juegos[int(opcion) - 1].iniciar_atraccion_grupo(grupo)
         elif opcion != str(len(juegos) + 1):
-            print(f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}.")
+            print(
+                f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}."
+            )
 
 
 def menu_electronicos(grupo: list[Persona], juegos: list[JuegoElectronico]):
@@ -56,7 +60,9 @@ def menu_electronicos(grupo: list[Persona], juegos: list[JuegoElectronico]):
         if opcion.isdigit() and 1 <= int(opcion) <= len(juegos):
             juegos[int(opcion) - 1].iniciar_juego_grupo(grupo)
         elif opcion != str(len(juegos) + 1):
-            print(f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}.")
+            print(
+                f"No ingresó un número válido, vuélvalo a intentar del 1 al {len(juegos) + 1}."
+            )
 
 
 def menu_sedes(grupo, juegos_acuaticos, juegos_electronicos):
@@ -86,6 +92,7 @@ def menu_sedes(grupo, juegos_acuaticos, juegos_electronicos):
 
 # ─── MENÚ PRINCIPAL ───────────────────────────────────────
 
+
 def menu_principal(grupo, juegos_acuaticos, juegos_electronicos):
     opcion = ""
 
@@ -99,63 +106,15 @@ def menu_principal(grupo, juegos_acuaticos, juegos_electronicos):
         if opcion == "1":
             menu_sedes(grupo, juegos_acuaticos, juegos_electronicos)
         elif opcion == "2":
-            print("Hasta luego!")
+            print("Hasta luego Esperamos que se haya divertidoo!!! 🎆🎆")
         else:
             print("Teclea un número ya sea 1 o 2 para recibir atención ;)")
 
 
 # ─── MAIN ─────────────────────────────────────────────────
 
+
 def main():
-    juegos_acuaticos = [
-        Acuatico(
-            nombre="Tobogán del Dragón",
-            capacidad=3,
-            profundidad=1.70,
-            propulsion="Gravedad",
-            estatura_minima=1.20,
-            edad_minima=8,
-        ),
-        RioLento(
-            nombre="Río Peligro",
-            capacidad=10,
-            profundidad=0.8,
-            estatura_minima=1.0,
-            edad_minima=5,
-        ),
-        BotesChocones(
-            nombre="Botes Locos",
-            capacidad=6,
-            profundidad=1.0,
-            estatura_minima=1.1,
-            edad_minima=7,
-        ),
-    ]
-
-    juegos_electronicos = [
-        SimuladorVR(
-            nombre="Simulación Apocalipsis Zombie",
-            capacidad=4,
-            duracion=10,
-            edad_minima=12,
-            estatura_minima=1.30,
-        ),
-        ShooterFPS(
-            nombre="Doom Arcade",
-            capacidad=1,
-            duracion=15,
-            edad_minima=15,
-            estatura_minima=1.40,
-        ),
-        JuegoArcade(
-            nombre="Tetris Versus",
-            capacidad=2,
-            duracion=20,
-            edad_minima=5,
-            estatura_minima=1.20,
-        ),
-    ]
-
     grupo = registrar_personas()
     menu_principal(grupo, juegos_acuaticos, juegos_electronicos)
 
