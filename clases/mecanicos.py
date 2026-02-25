@@ -1,5 +1,6 @@
+import time
 class Mecanicas:
-    def _init_(
+    def __init__(
         self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str
     ) -> None:
         self.nombre = nombre
@@ -28,8 +29,8 @@ class Mecanicas:
 
 
 class MontanaRusa(Mecanicas):
-    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, velocidad_maxima: float, inversiones: int):
-        super()._init_(
+    def __init__(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, velocidad_maxima: float, inversiones: int):
+        super().__init__(
             nombre,
             estatura_minima,
             edad_minima,
@@ -44,11 +45,35 @@ class MontanaRusa(Mecanicas):
         print("Velocidad maxima: ", self.velocidad_maxima, "km/h")
         print("Numero de inversiones: ", self.inversiones)
     
+    def entrar_montana(self, grupo) -> None:
+        personas_abordo = []
+        for persona in grupo:
+            if self.validar_condiciones_entrada(persona):
+                print("Puedes entrar ", persona.nombre, "😁")
+                personas_abordo.append(persona)
+            else:
+                print("Lo siento, no puedes entrar ", persona.nombre, " :c")
+            print("=" * 40)
+        if personas_abordo:
+            self.iniciar_recorrido(personas_abordo)
+        else:
+            print("No hay personas que puedan subir")
 
+    def iniciar_recorrido(self, lista_personas) -> None:
+        print("Personas abordo: ")
+        for persona in lista_personas:
+            print(persona.nombre)
+            time.sleep(1)
+        print("Iniciando recorrido 🎢")
+        for i in range(0,4):
+            print("🎢")
+            time.sleep(1)
+        print("Recorrido finalizado")
+        
 
 class RuedaDeLaFortuna(Mecanicas):
-    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, altura_maxima: float):
-        super()._init_(
+    def __init__(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, altura_maxima: float):
+        super().__init__(
             nombre,
             estatura_minima,
             edad_minima,
@@ -61,10 +86,32 @@ class RuedaDeLaFortuna(Mecanicas):
         super().mostrar_informacion()
         print("Altura maxima:", self.altura_maxima)
 
+    def entrar_rueda(self, grupo) -> None:
+        personas_abordo = []
+        for persona in grupo:
+            if self.validar_condiciones_entrada(persona):
+                print("Puedes entrar", persona.nombre, "😁")
+                personas_abordo.append(persona)
+            else:
+                print("Lo siento, no puedes entrar", persona.nombre, ":c")
+            print("=" * 40)
+        if personas_abordo:
+            self.iniciar_vuelta()
+        else:
+            print("No hay personas que puedan subir")
+
+    def iniciar_vuelta(self) -> None:
+        print("Iniciando vuelta 🎡")
+        for i in range(0,4):
+            print("🎡")
+            time.sleep(1)
+            print("⛅")
+        print("Vuelta finalizada")
+
 
 class BarcoPirata(Mecanicas):
-    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, capacidad: int):
-        super()._init_(
+    def __init__(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, capacidad: int):
+        super().__init__(
             nombre,
             estatura_minima,
             edad_minima,
@@ -77,28 +124,31 @@ class BarcoPirata(Mecanicas):
         super().mostrar_informacion()
         print("Capacidad personas:", self.capacidad)
 
+    def entrar_barco(self, grupo) -> None:
+        personas_abordo = []
+        for persona in grupo:
+            if self.validar_condiciones_entrada(persona):
+                print("Puedes entrar", persona.nombre, "😁")
+                personas_abordo.append(persona)
+            else:
+                print("Lo siento, no puedes entrar", persona.nombre, ":c")
+            print("=" * 40)
+        if personas_abordo:
+            self.iniciar_barco()
+        else:
+            print("No hay personas que puedan subir")
 
-class TorreCaidaLibre(Mecanicas):
-    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, altura: float, velocidad_caida: float):
-        super()._init_(
-            nombre,
-            estatura_minima,
-            edad_minima,
-            reglas,
-            precauciones,
-        )
-        self.altura = altura
-        self.velocidad_caida = velocidad_caida
-
-    def mostrar_informacion(self) -> None:
-        super().mostrar_informacion()
-        print("Altura:", self.altura)
-        print("Velocidad de caida:", self.velocidad_caida)
+    def iniciar_barco(self) -> None:
+        print("Iniciando juego ⚓")
+        for i in range(0,5):
+            print("🚢")
+            time.sleep(1)
+        print("Juego finalizado")
 
 
 class CarrosChocones(Mecanicas):
-    def _init_(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, numero_carros: int, duracion: float):
-        super()._init_(
+    def __init__(self, nombre: str, estatura_minima: float, edad_minima: int, reglas: str, precauciones: str, numero_carros: int, duracion: float):
+        super().__init__(
             nombre,
             estatura_minima,
             edad_minima,
@@ -112,3 +162,25 @@ class CarrosChocones(Mecanicas):
         super().mostrar_informacion()
         print("Numero de carritos: ", self.numero_carros)
         print("Duracion ronda: ", self.duracion)
+
+    def entrar_carros(self, grupo) -> None:
+        personas_abordo = []
+        for persona in grupo:
+            if self.validar_condiciones_entrada(persona):
+                print("Puedes entrar", persona.nombre, "😁")
+                personas_abordo.append(persona)
+            else:
+                print("Lo siento, no puedes entrar", persona.nombre, ":c")
+            print("=" * 40)
+        if len(personas_abordo)>=2:
+            self.iniciar_carros()
+        else:
+            print("No hay personas suficientes para iniciar el juego")
+
+    def iniciar_carros(self) -> None:
+        print("Iniciando juego 🏎")
+        for i in range(0,5):
+            print("🏎")
+            time.sleep(1)
+            print("💥")
+        print("Juego finalizado")
