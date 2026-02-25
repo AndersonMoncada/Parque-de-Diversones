@@ -3,7 +3,12 @@ from .Usuario import Persona
 
 
 class Acuatico:
-    """Representa una atracción acuática del parque."""
+    """
+    Clase base para todas las atracciones acuáticas del parque de diversiones.
+    
+    Maneja validaciones de acceso, registro de visitantes, capacidad limitada
+    y presentaciones animadas interactivas.
+    """
 
     def __init__(
         self,
@@ -15,20 +20,19 @@ class Acuatico:
         edad_minima: int,
     ):
         """
-        Inicializa una atracción acuática.
-
+        Inicializa una atracción acuática con validación de parámetros.
+        
         Args:
-            nombre: Nombre de la atracción
-            capacidad: Número máximo de personas
-            profundidad: Profundidad del agua en metros
-            propulsion: Tipo de propulsión
-            estatura_minima: Estatura mínima en metros
-            edad_minima: Edad mínima requerida
-
+            nombre (str): Nombre de la atracción acuática.
+            capacidad (int): Número máximo de personas simultáneas.
+            profundidad (float): Profundidad del agua en metros.
+            propulsion (str): Tipo de propulsión ('corriente', 'motor', etc.).
+            estatura_minima (float): Estatura mínima requerida en metros.
+            edad_minima (int): Edad mínima requerida en años.
+        
         Raises:
-            ValueError: Si algún parámetro no es válido
+            ValueError: Si capacidad <= 0, profundidad <= 0, o valores negativos.
         """
-
         if capacidad <= 0:
             raise ValueError("La capacidad debe ser mayor a 0")
         if profundidad <= 0:
@@ -48,46 +52,72 @@ class Acuatico:
 
     @property
     def nombre(self) -> str:
-        """Retorna el nombre de la atracción."""
+        """Nombre de la atracción acuática."""
         return self._nombre
 
     @property
     def capacidad(self) -> int:
-        """Retorna la capacidad máxima."""
+        """Capacidad máxima de personas simultáneas."""
         return self._capacidad
 
     @property
     def estatura_minima(self) -> float:
-        """Retorna la estatura mínima."""
+        """Estatura mínima requerida en metros."""
         return self._estatura_minima
 
     @property
     def edad_minima(self) -> int:
-        """Retorna la edad mínima."""
+        """Edad mínima requerida en años."""
         return self._edad_minima
 
+    @property
+    def profundidad(self) -> float:
+        """Profundidad del agua en metros."""
+        return self._profundidad
+
+    @property
+    def propulsion(self) -> str:
+        """Tipo de propulsión de la atracción."""
+        return self._propulsion
+
     def verificar_estatura(self, persona: Persona) -> bool:
-        """Verifica si la persona cumple con la estatura mínima."""
+        """
+        Verifica si la persona cumple el requisito de estatura mínima.
+        
+        Args:
+            persona (Persona): Instancia de Persona a validar.
+            
+        Returns:
+            bool: True si cumple estatura mínima, False otherwise.
+        """
         if persona.estatura is None or persona.estatura <= 0:
             return False
         return persona.estatura >= self._estatura_minima
 
     def verificar_edad(self, persona: Persona) -> bool:
-        """Verifica si la persona cumple con la edad mínima."""
+        """
+        Verifica si la persona cumple el requisito de edad mínima.
+        
+        Args:
+            persona (Persona): Instancia de Persona a validar.
+            
+        Returns:
+            bool: True si cumple edad mínima, False otherwise.
+        """
         if persona.edad is None or persona.edad < 0:
             return False
         return persona.edad >= self._edad_minima
 
     def puede_acceder(self, persona: Persona, tiene_entrada: bool) -> bool:
         """
-        Verifica si una persona puede acceder a la atracción.
-
+        Verifica acceso completo (edad, estatura y entrada válida).
+        
         Args:
-            persona: Objeto Persona a verificar
-            tiene_entrada: Si tiene entrada válida
-
+            persona (Persona): Persona a validar.
+            tiene_entrada (bool): Si posee entrada válida.
+            
         Returns:
-            True si cumple todos los requisitos
+            bool: True si puede acceder completamente.
         """
         return (
             self.verificar_edad(persona)
@@ -96,7 +126,15 @@ class Acuatico:
         )
 
     def registrar_visitante(self, nombre_visitante: str) -> bool:
-        """Registra un visitante en la atracción."""
+        """
+        Registra un visitante si hay capacidad disponible.
+        
+        Args:
+            nombre_visitante (str): Nombre de la persona a registrar.
+            
+        Returns:
+            bool: True si se registró exitosamente, False si no.
+        """
         if not nombre_visitante or not nombre_visitante.strip():
             return False
         nombre = nombre_visitante.strip()
@@ -108,22 +146,41 @@ class Acuatico:
         return True
 
     def listar_visitantes(self) -> list[str]:
-        """Retorna lista de visitantes registrados."""
+        """
+        Retorna la lista actual de visitantes registrados.
+        
+        Returns:
+            list[str]: Copia de la lista de visitantes.
+        """
         return list(self._visitantes)
 
     def espacios_disponibles(self) -> int:
-        """Retorna espacios disponibles."""
+        """
+        Calcula espacios restantes disponibles.
+        
+        Returns:
+            int: Número de espacios libres.
+        """
         return self._capacidad - len(self._visitantes)
 
     def __str__(self) -> str:
-        """Representación en texto de la atracción."""
+        """
+        Representación legible de la atracción para impresión.
+        
+        Returns:
+            str: String formateado con nombre y requisitos básicos.
+        """
         partes = [f"🌊 {self._nombre}"]
         partes.append(f"Capacidad: {self._capacidad}")
         partes.append(f"Edad mínima: {self._edad_minima} años")
         return " | ".join(partes)
 
     def mostrar_informacion(self) -> None:
-        """Muestra información detallada de forma animada."""
+        """
+        Muestra información detallada con animación de carga progresiva.
+        
+        Presenta todos los datos técnicos de la atracción de forma visual.
+        """
         print(f"\n{'='*30}")
         print(f" INFORMACIÓN DE LA ATRACCIÓN")
         print(f"{'='*30}")
@@ -153,11 +210,11 @@ class Acuatico:
         self, persona: Persona, tiene_entrada: bool
     ) -> None:
         """
-        Verifica el acceso de forma interactiva y animada.
-
+        Verifica acceso de forma interactiva con animaciones paso a paso.
+        
         Args:
-            persona: Persona que quiere acceder
-            tiene_entrada: Si tiene entrada
+            persona (Persona): Persona solicitando acceso.
+            tiene_entrada (bool): Si tiene entrada válida.
         """
         print(f"\n{'─'*30}")
         print(f"VERIFICANDO ACCESO: {persona.nombre}")
@@ -233,11 +290,11 @@ class Acuatico:
         self, grupo: list[Persona], tienen_entrada: bool = True
     ) -> None:
         """
-        Procesa un grupo de personas para la atracción.
-
+        Procesa acceso completo de un grupo con verificaciones individuales.
+        
         Args:
-            grupo: Lista de personas
-            tienen_entrada: Si tienen entrada (por defecto True)
+            grupo (list[Persona]): Lista de personas del grupo.
+            tienen_entrada (bool): Si todo el grupo tiene entrada (default: True).
         """
         print(f"\n{'='*30}")
         print(f" BIENVENIDOS A: {self._nombre.upper()}")
@@ -258,7 +315,11 @@ class Acuatico:
 
 
 class RioLento(Acuatico):
-    """Representa el juego acuático Río Lento."""
+    """
+    Clase específica para la atracción Río Lento.
+    
+    Utiliza corriente natural como método de propulsión.
+    """
 
     def __init__(
         self,
@@ -268,6 +329,16 @@ class RioLento(Acuatico):
         estatura_minima: float,
         edad_minima: int,
     ):
+        """
+        Inicializa Río Lento con propulsión por corriente natural.
+        
+        Args:
+            nombre (str): Nombre específico del río lento.
+            capacidad (int): Capacidad máxima de personas.
+            profundidad (float): Profundidad del agua.
+            estatura_minima (float): Estatura mínima requerida.
+            edad_minima (int): Edad mínima requerida.
+        """
         super().__init__(
             nombre,
             capacidad,
@@ -279,7 +350,11 @@ class RioLento(Acuatico):
 
 
 class BotesChocones(Acuatico):
-    """Representa el juego acuático Botes Chocones."""
+    """
+    Clase específica para Botes Chocones.
+    
+    Utiliza motores eléctricos para propulsión.
+    """
 
     def __init__(
         self,
@@ -289,6 +364,16 @@ class BotesChocones(Acuatico):
         estatura_minima: float,
         edad_minima: int,
     ):
+        """
+        Inicializa Botes Chocones con propulsión eléctrica.
+        
+        Args:
+            nombre (str): Nombre específico de los botes.
+            capacidad (int): Capacidad máxima de personas.
+            profundidad (float): Profundidad del agua.
+            estatura_minima (float): Estatura mínima requerida.
+            edad_minima (int): Edad mínima requerida.
+        """
         super().__init__(
             nombre,
             capacidad,
