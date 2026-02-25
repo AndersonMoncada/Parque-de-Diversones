@@ -1,6 +1,6 @@
 import time
 import random
-from Usuario import Persona
+from .Usuario import Persona
 
 
 class JuegosFisicos:
@@ -191,6 +191,7 @@ class SaltoBungee(JuegosFisicos):
             print("🧍🏼‍♂️")
 
         print("Salto terminado, ", persona.nombre)
+
 
 class TiroConArco(JuegosFisicos):
 
